@@ -4,10 +4,12 @@
             "question": "Какого цвета бургер?",
             "answers": [
                 {
+                    "id": "cb01",
                     "title": "Стандарт",
                     "url": "./image/burger.png"
                 },
                 {
+                    "id": "cb02",
                     "title": "Черный",
                     "url": "./image/burgerBlack.png"
                 }
@@ -18,14 +20,17 @@
             "question": "Из какого мяса котлета?",
             "answers": [
                 {
+                    "id": "cb03",
                     "title": "Курица",
                     "url": "./image/chickenMeat.png"
                 },
                 {
+                    "id": "cb04",
                     "title": "Говядина",
                     "url": "./image/beefMeat.png"
                 },
                 {
+                    "id": "cb05",
                     "title": "Свинина",
                     "url": "./image/porkMeat.png"
                 }
@@ -36,18 +41,22 @@
             "question": "Дополнительные ингредиенты?",
             "answers": [
                 {
+                    "id": "fb06",
                     "title": "Помидор",
                     "url": "./image/tomato.png"
                 },
                 {
+                    "id": "cb07",
                     "title": "Огурец",
                     "url": "./image/cucumber.png"
                 },
                 {
+                    "id": "cb08",
                     "title": "Салат",
                     "url": "./image/salad.png"
                 },
                 {
+                    "id": "cb09",
                     "title": "Лук",
                     "url": "./image/onion.png"
                 }
@@ -58,14 +67,17 @@
             "question": "Добавить соус?",
             "answers": [
                 {
+                    "id": "cb10",
                     "title": "Чесночный",
                     "url": "./image/sauce1.png"
                 },
                 {
+                    "id": "cb11",
                     "title": "Томатный",
                     "url": "./image/sauce2.png"
                 },
                 {
+                    "id": "cb12",
                     "title": "Горчичный",
                     "url": "./image/sauce3.png"
                 }

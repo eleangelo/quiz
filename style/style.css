@@ -20,7 +20,7 @@ li {
 }
 
 input:checked + label{
-    border: 2px solid #3CB371;
+    border: 3px solid #3CB371;
     color: #3CB371;
 }
 
@@ -61,21 +61,12 @@ label span {
     
 }
 
-.modal-title {
-    font-size: 30px;
-    font-weight: bold;
-}
-
-.question {
-    font-size: 25px;
-    font-weight: bold;
-}
 .modal-content {
 
     background: #E0FFFF;
-    /* color: #3CB371; */
-    /* -webkit-text-stroke-width: 1px; */
-    /* -webkit-text-stroke-color: black;  */
+    color: #3CB371; 
+    -webkit-text-stroke-width: 1px;
+    -webkit-text-stroke-color: black; 
 }
 
 .btn-outline-danger {
