@@ -10,7 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
         burgerBtn = document.getElementById('burger'),
         prevButton = document.getElementById('prev'),
         nextButton = document.getElementById('next'),
-        modalDialog = document.querySelector('.modal-dialog');
+        sendButton = document.getElementById('send'),
+        modalDialog = document.querySelector('.modal-dialog'),
+        modalTitle = document.querySelector('.modal-title');
         
         let clientWidth = document.documentElement.clientWidth; 
 
@@ -171,9 +173,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // функция начала тестирования
     const playTest = () => {
-
+    // заполнение выбранными данными
+        const finalAnswers = [];
+        const obj = {};
+        
     // переменная с номером вопроса  
-        let numberQuestion = 0
+        let numberQuestion = 0;
+        modalTitle.textContent = 'Ответь на вопрос';
 
         // функция рендеринга ответов
         const renderAnswers = (index) => {
@@ -183,7 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
                 answerItem.classList.add('answers-item', 'd-flex', 'ustify-content-between' );
                 answerItem.innerHTML = `
-                    <input type="${questions[index].type}" id="${answer.id}" name="answer" class="d-none">
+                    <input type="${questions[index].type}" id="${answer.id}" name="answer" class="d-none" value="${answer.title}">
                     <label for="${answer.id}" class="d-flex flex-column justify-content-between">
                     <img class="answerImg" src="${answer.url}" alt="burger">
                     <span>${answer.title}</span>
@@ -203,7 +209,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 questionTitle.textContent = `${questions[indexQuestion].question}`;
                 renderAnswers(indexQuestion);
                 nextButton.classList.remove('d-none');
-                prevButton.classList.remove('d-none')
+                prevButton.classList.remove('d-none');
+                sendButton.classList.add('d-none')
             }
 
             if (numberQuestion === 0) {
@@ -211,17 +218,73 @@ document.addEventListener('DOMContentLoaded', () => {
             }
             
             if (numberQuestion === questions.length) {
+                modalTitle.textContent = '';
+                questionTitle.textContent = '';
                 nextButton.classList.add('d-none');
-                formAnswers.textContent = "Спасибо"
+                prevButton.classList.add('d-none');
+                sendButton.classList.remove('d-none');
+                
+            
+                formAnswers.innerHTML = `
+                <div class="form-group">
+                    <label for="numberPhone">Введите ваш номер телефона</label>
+                    <input type="phone" class="form-control" id="numberPhone">
+                </div>
+                `
+
+                const numberPhone = document.getElementById('numberPhone')
+                numberPhone.addEventListener('input',(event) => {
+                    event.target.value = event.target.value.replace(/[^0-9+-]/, '')
+                })
+                
+            }
+
+            if (numberQuestion === questions.length + 1) {
+                sendButton.classList.add('d-none');
+                formAnswers.textContent = 'Спасибо за пройденный тест';
+
+                for (let key in obj) {
+                    let newObj = {};
+                    newObj[key] = obj[key];
+                    finalAnswers.push(newObj);
+                }
+            
+            
+                setTimeout(() => { 
+                    modalBlock.classList.remove('d-block');
+                }, 2000);
+
             }
         }
 
         // запуск ф-ции рендеринга
         renderQuestions(numberQuestion);
 
+        const checkAnswer = () => {
+            
+            
+            const inputs = [...formAnswers.elements].filter((input) => input.checked || input.id === 'numberPhone' );
+        
+            
+            
+            inputs.forEach((input, index) => {
+                if (numberQuestion >= 0 && numberQuestion <= questions.length - 1) {
+                    obj[`${index}_${questions[numberQuestion].question}`] = input.value;
+                }
+
+                if (numberQuestion === questions.length) {
+                    obj['Номер телефона'] = input.value
+                }
+
+            
+            })            
+            
+            // finalAnswers.push(obj)
+        }
 
         // оьбаботчики событий кнопок
         nextButton.onclick = () => {
+            checkAnswer();
             numberQuestion++;
 
             renderQuestions(numberQuestion);
@@ -233,7 +296,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             renderQuestions(numberQuestion)
         }   
+        
+        sendButton.onclick =() => {
+            checkAnswer();
+            numberQuestion++;
+            renderQuestions(numberQuestion);
+            console.log(finalAnswers);
             
+        }
+        
+
     }
 
    
